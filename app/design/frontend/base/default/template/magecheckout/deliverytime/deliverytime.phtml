@@ -20,6 +20,7 @@ if ($data = $this->getSessionData()) {
 	</select>
 <?php endif; ?>
 <script>
+var $j = jQuery.noConflict();
 	//set defalut value
 	$j('.time-range option[value="<?php echo (isset($timeRange) && $timeRange)?$timeRange:''?>"]').attr("selected", true);
 
