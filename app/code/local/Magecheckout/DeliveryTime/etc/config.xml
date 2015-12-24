@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magegiant
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the magegiant.com license that is
+ * available through the world-wide-web at this URL:
+ * http://magegiant.com/license-agreement/
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magegiant
+ * @package     Magegiant_DeliveryTime
+ * @copyright   Copyright (c) 2015 Magegiant (http://magegiant.com/)
+ * @license     http://magegiant.com/license-agreement/
+ */
+-->
+<config>
+    <modules>
+        <Magecheckout_DeliveryTime>
+            <version>0.1.0</version>
+        </Magecheckout_DeliveryTime>
+    </modules>
+    <frontend>
+        <routers>
+            <deliverytime>
+                <use>standard</use>
+                <args>
+                    <module>Magecheckout_DeliveryTime</module>
+                    <frontName>deliverytime</frontName>
+                </args>
+            </deliverytime>
+        </routers>
+        <layout>
+            <updates>
+                <deliverytime>
+                    <file>magecheckout/deliverytime.xml</file>
+                </deliverytime>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magecheckout_DeliveryTime>
+                    <files>
+                        <default>Magecheckout_DeliveryTime.csv</default>
+                    </files>
+                </Magecheckout_DeliveryTime>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+        <routers>
+            <deliverytimeadmin>
+                <use>admin</use>
+                <args>
+                    <module>Magecheckout_DeliveryTime</module>
+                    <frontName>deliverytimeadmin</frontName>
+                </args>
+            </deliverytimeadmin>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <deliverytime>
+                    <file>magecheckout/deliverytime.xml</file>
+                </deliverytime>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magecheckout_DeliveryTime>
+                    <files>
+                        <default>Magecheckout_DeliveryTime.csv</default>
+                    </files>
+                </Magecheckout_DeliveryTime>
+            </modules>
+        </translate>
+    </adminhtml>
+    <global>
+        <models>
+            <deliverytime>
+                <class>Magecheckout_DeliveryTime_Model</class>
+                <resourceModel>deliverytime_mysql4</resourceModel>
+            </deliverytime>
+            <deliverytime_mysql4>
+                <class>Magecheckout_DeliveryTime_Model_Mysql4</class>
+                <entities>
+                    <deliverytime>
+                        <table>magecheckout_deliverytime</table>
+                    </deliverytime>
+                </entities>
+            </deliverytime_mysql4>
+        </models>
+        <resources>
+            <magecheckout_deliverytime_setup>
+                <setup>
+                    <module>Magecheckout_DeliveryTime</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </magecheckout_deliverytime_setup>
+            <deliverytime_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </deliverytime_write>
+            <deliverytime_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </deliverytime_read>
+        </resources>
+        <blocks>
+            <deliverytime>
+                <class>Magecheckout_DeliveryTime_Block</class>
+            </deliverytime>
+        </blocks>
+        <helpers>
+            <deliverytime>
+                <class>Magecheckout_DeliveryTime_Helper</class>
+            </deliverytime>
+        </helpers>
+        <events>
+            <checkout_controller_onepage_save_shipping_method>
+                <observers>
+                    <delivery_time_onepage_save_shipping_method>
+                        <class>deliverytime/observer</class>
+                        <method>checkoutControllerOnepageSaveShippingMethod</method>
+                    </delivery_time_onepage_save_shipping_method>
+                </observers>
+            </checkout_controller_onepage_save_shipping_method>
+            <checkout_submit_all_after>
+                <observers>
+                    <delivery_time_onepage_submit_all_after>
+                        <type>singleton</type>
+                        <class>deliverytime/observer</class>
+                        <method>checkoutSubmitAllAfter</method>
+                    </delivery_time_onepage_submit_all_after>
+                </observers>
+            </checkout_submit_all_after>
+            <!-- Intergrate OSC-->
+            <controller_action_layout_load_before>
+                <observers>
+                    <delivery_time_layout_load_after>
+                        <type>singleton</type>
+                        <class>deliverytime/observer</class>
+                        <method>controllerActionLayoutLoadAfter</method>
+                    </delivery_time_layout_load_after>
+                </observers>
+            </controller_action_layout_load_before>
+            <securedcheckout_save_order_session_data_after>
+                <observers>
+                    <delivery_time_usnset_sesion_data>
+                        <type>singleton</type>
+                        <class>deliverytime/observer</class>
+                        <method>securedcheckoutSaveOrderSessionDataAfter</method>
+                    </delivery_time_usnset_sesion_data>
+                </observers>
+            </securedcheckout_save_order_session_data_after>
+        </events>
+
+    </global>
+
+    <default>
+        <deliverytime>
+            <general>
+                <is_enabled>1</is_enabled>
+            </general>
+        </deliverytime>
+    </default>
+
+</config>

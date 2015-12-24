@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_sales_order_view>
+        <reference name="gift_options">
+            <action method="setTemplate">
+                <template>magecheckout/deliverytime/totals/order/view/delivery.phtml</template>
+            </action>
+        </reference>
+    </adminhtml_sales_order_view>
+</layout>

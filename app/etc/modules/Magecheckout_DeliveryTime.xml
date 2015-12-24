@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Magecheckout_DeliveryTime>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Magecheckout_DeliveryTime>
+    </modules>
+</config>

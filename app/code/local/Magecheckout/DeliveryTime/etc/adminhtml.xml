@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magecheckout
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the magecheckout.com license that is
+ * available through the world-wide-web at this URL:
+ * http://magecheckout.com/license-agreement/
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magecheckout
+ * @package     Magecheckout_DeliveryTime
+ * @copyright   Copyright (c) 2015 Magecheckout (http://magecheckout.com/)
+ * @license     http://magecheckout.com/license-agreement/
+ */
+-->
+<config>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <deliverytime module="deliverytime" translate="title">
+                                        <title>Delivery Time</title>
+                                        <sort_order>68</sort_order>
+                                    </deliverytime>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <deliverytime module="deliverytime" translate="title">
+                        <title>DeliveryTime</title>
+                        <sort_order>71</sort_order>
+                        <children>
+                            <deliverytime module="deliverytime" translate="title">
+                                <title>Manage Items</title>
+                                <sort_order>0</sort_order>
+                            </deliverytime>
+                            <settings module="deliverytime" translate="title">
+                                <title>Settings</title>
+                                <sort_order>1000</sort_order>
+                            </settings>
+                        </children>
+                    </deliverytime>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

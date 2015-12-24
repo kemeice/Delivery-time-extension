@@ -1,0 +1,15 @@
+<div class="input-box delivery-time" style="margin: 20px 0px">
+    <div>
+        <fieldset id="deliverydate">
+            <?php echo $this->getChildHtml(); ?>
+        </fieldset>
+    </div>
+</div>
+<?php if ($this->getPosition() == Magecheckout_DeliveryTime_Model_Deliverytime::BEFORE_SHIPPING): ?>
+	<script>
+        $j(".delivery-time").insertBefore($j('#checkout-step-shipping_method dl.sp-methods'));
+
+		if ($j('#one-step-checkout-shipping-method dl.sp-methods'))
+			$j(".delivery-time").insertBefore($j('#one-step-checkout-shipping-method dl.sp-methods'));
+    </script>
+<?php endif ?>

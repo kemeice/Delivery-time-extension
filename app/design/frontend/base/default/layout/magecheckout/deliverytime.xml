@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magecheckout
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magecheckout.com license that is
+ * available through the world-wide-web at this URL:
+ * http://magecheckout.com/license-agreement/
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magecheckout
+ * @package     Magecheckout_DeliveryTime
+ * @copyright   Copyright (c) 2014 Magecheckout (http://magecheckout.com/)
+ * @license     http://magecheckout.com/license-agreement/
+ */
+-->
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addJs">
+                <script>magecheckout/deliverytime/jquery-ui-1.10.4.custom.min.js</script>
+            </action>
+            <!--<action method="addJs">-->
+            <!--<script>magecheckout/deliverytime/jquery-1.10.2.js</script>-->
+            <!--</action>-->
+            <action method="addCss">
+                <stylesheet>css/magecheckout/deliverytime/jquery-ui-1.10.4.custom.min.css</stylesheet>
+            </action>
+        </reference>
+    </default>
+    <!--=======/Intergrate Shipping======-->
+    <checkout_onepage_shippingmethod>
+        <block type="deliverytime/checkout_container" output="toHtml" name="checkout.shipping.container"
+               template="magecheckout/deliverytime/shipping/container.phtml">
+            <block type="deliverytime/deliverytime" name="deliverytime"
+                   template="magecheckout/deliverytime/deliverytime.phtml"/>
+        </block>
+    </checkout_onepage_shippingmethod>
+
+    <!--=======/Intergrate OSC======-->
+    <deliverytime_osc>
+        <reference name="one.step.checkout.container.form.shipping.method.available.extra">
+            <block type="deliverytime/checkout_container"
+                   name="checkout.shipping.container"
+                   template="magecheckout/deliverytime/shipping/container.phtml"
+                   as='checkout.shipping.container'>
+                <block type="deliverytime/deliverytime" name="deliverytime"
+                       template="magecheckout/deliverytime/deliverytime.phtml"/>
+            </block>
+        </reference>
+    </deliverytime_osc>
+
+    <!--=============-->
+    <sales_order_print>
+        <reference name="sales.order.print">
+            <action method="setTemplate">
+                <template>magecheckout/deliverytime/order/print.phtml</template>
+            </action>
+        </reference>
+    </sales_order_print>
+    <sales_email_order_items>
+        <reference name="items">
+            <action method="setTemplate">
+                <template>magecheckout/deliverytime/order/email.phtml</template>
+            </action>
+        </reference>
+    </sales_email_order_items>
+    <sales_order_view>
+        <reference name="sales.order.info">
+            <action method="setTemplate">
+                <template>magecheckout/deliverytime/order/view.phtml</template>
+            </action>
+        </reference>
+    </sales_order_view>
+</layout>

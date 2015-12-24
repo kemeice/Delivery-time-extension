@@ -1,0 +1,110 @@
+<?php
+$date = '';
+if ($data = $this->getSessionData()) {
+	$date      = $data['date'];
+	$timeRange = $data['range'];
+}
+?>
+<input value="<?php echo $date ?>" class="input-text" id="date-picker" name="date-picker" style="margin-bottom: 15px" readonly/>
+<p><?php echo Mage::helper('deliverytime')->__('Choose the suitable delivery date'); ?></p>
+<?php if ($this->getRange()): ?>
+
+	<select name="time-range" class="time-range">
+	<?php
+	$range = $this->getRange();
+	foreach ($range as $key => $value):?>
+		<?php if ($value['start'] && $value['end']): ?>
+			<option value="<?php echo $key; ?>"><?php echo $value['start'] . '-' . $value['end'] ?></option>
+		<?php endif; ?>
+	<?php endforeach; ?>
+	</select>
+<?php endif; ?>
+<script>
+	//set defalut value
+	$j('.time-range option[value="<?php echo (isset($timeRange) && $timeRange)?$timeRange:''?>"]').attr("selected", true);
+
+	var weeksday = [<?php echo $this->getWeekDays()?>];
+	var specifyday = <?php echo $this->getJsSpecifyDays()?>;
+	var dateToday = new Date();
+	$j("#date-picker").datepicker({
+		dateFormat: '<?php echo $this->getJsDateFormat();?>',
+		beforeShowDay: function (date) {
+			var day = date.getDay();
+			var datetime = $j.datepicker.formatDate('<?php echo $this->getShortJsDateFormat()?>', date);
+			return [($j.inArray(day, weeksday) == -1 && $j.inArray(datetime, specifyday) == -1)]
+		},
+		minDate: dateToday,
+		showOn: "button",
+		buttonImage: '<?php echo $this->getSkinUrl('css/magecheckout/deliverytime/images/calendar.png') ?>',
+		buttonImageOnly: true,
+		buttonText: '<?php echo Mage::helper('deliverytime')->__('Choose the delivery date')?>'
+	});
+	//trigger click calendar img to show datepicker
+	$j('#date-picker').click(function () {
+		$j('.ui-datepicker-trigger').trigger("click");
+	});
+
+
+	<?php if ($this->getRouteName() === 'securedcheckout'): ?>
+	//saveData
+	$j('#date-picker').change(function () {
+		var date = $j('#date-picker').val();
+		var range = $j('.time-range').val();
+		$j.post('<?php echo Mage::getBaseUrl().'/deliverytime/index/saveData'?>', {date: '' + date, range: '' + range});
+	});
+	$j('.time-range').change(function () {
+		var date = $j('#date-picker').val();
+		var range = $j('.time-range').val();
+		$j.post('<?php echo Mage::getBaseUrl().'/deliverytime/index/saveData'?>', {date: '' + date, range: '' + range});
+	});
+	<?php endif; ?>
+</script>
+
+
+<style>
+	img.ui-datepicker-trigger {
+		cursor: pointer;
+		display: inline;
+		position: relative;
+		top: 5px;
+		left: 8px;
+	}
+
+	#date-picker {
+		cursor: pointer;
+		height: 30px !important;
+		min-height: 0px !important;
+	}
+
+	#checkout-step-shipping_method .input-text.hasDatepicker {
+		width: 45%;
+		max-width: 150px;
+		padding: 5px 5px;
+	}
+
+	#checkout-step-shipping_method select.time-range {
+		max-width: 150px;
+		padding: 5px 0;
+	}
+
+	/*OSC Integrated*/
+	#one-step-checkout-shipping-method .input-text.hasDatepicker {
+		width: 93%;
+	}
+
+	#one-step-checkout-shipping-method select.time-range {
+		max-width: 100%;
+		padding: 5px 0;
+	}
+
+	#date-picker:hover {
+		border: 1px solid #3399cc;
+		outline-offset: -2px;
+		outline: -webkit-focus-ring-color auto 5px;
+	}
+
+
+
+
+</style>
+

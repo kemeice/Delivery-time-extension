@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magecheckout
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the magecheckout.com license that is
+ * available through the world-wide-web at this URL:
+ * http://magecheckout.com/license-agreement/
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magecheckout
+ * @package     Magecheckout_DeliveryTime
+ * @copyright   Copyright (c) 2014 Magecheckout (http://magecheckout.com/)
+ * @license     http://magecheckout.com/license-agreement/
+ */
+-->
+<config>
+    <tabs>
+        <magecheckout translate="label">
+            <label>Magecheckout Extensions</label>
+            <sort_order>100</sort_order>
+        </magecheckout>
+    </tabs>
+    <sections>
+        <deliverytime translate="label" module="deliverytime">
+            <class>separator-top</class>
+            <label>Delivery Time</label>
+            <tab>magecheckout</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>299</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <is_enabled translate="label">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_enabled>
+                        <position translate="label">
+                            <label>Select position to show delivery time field</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>10</sort_order>
+                            <source_model>deliverytime/system_config_source_general_position</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </position>
+                        <format translate="label">
+                            <label>Date Format</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>20</sort_order>
+                            <source_model>deliverytime/system_config_source_general_format</source_model>
+                            <show_in_default>20</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </format>
+                    </fields>
+                </general>
+                <time translate="label">
+                    <label>Time Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <days translate="label">
+                            <label>Weekend days</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>1</sort_order>
+                            <source_model>adminhtml/system_config_source_locale_weekdays</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>- No delivery at these days</comment>
+                        </days>
+                        <holidays translate="label">
+                            <label>National holidays</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>10</sort_order>
+
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[
+                            - Systax: <b style='color:red'>m-d</b> or <b style='color:red'>d-m</b> follow your Date Format<br>
+                            - Separate by command ','.<br>
+                            - No delivery at these days]]></comment>
+                        </holidays>
+                        <range translate="label">
+                            <label>Time Range</label>
+                            <frontend_model>deliverytime/adminhtml_system_config_source_time_range</frontend_model>
+                            <backend_model>adminhtml/system_config_backend_serialized_array</backend_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>20</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[
+                            - Systax: <b style='color:red'>hh:mm</b><br>
+                            - Example: Start 9:00 -> 21:00 <br>
+                            - Time format: 24h]]></comment>
+                        </range>
+                    </fields>
+                </time>
+            </groups>
+        </deliverytime>
+    </sections>
+</config>

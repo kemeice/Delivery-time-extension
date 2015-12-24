@@ -1,0 +1,26 @@
+<?php
+$orderId  = Mage::app()->getRequest()->getParam('order_id');
+$delivery = Mage::getModel('deliverytime/deliverytime')->load($orderId, 'order_id');
+?>
+<?php if ($delivery->getId()): ?>
+	<div class="entry-edit">
+	<div class="entry-edit-head">
+		<h4 class="icon-head head-shipping-method"><?php echo Mage::helper('deliverytime')->__('Delivery Time') ?></h4>
+	</div>
+	<div class="fieldset">
+            <table cellspacing="0" class="form-list">
+                <tbody>
+                    <tr>
+                        <td class="label"><label><?php echo Mage::helper('deliverytime')->__('Date:') ?></label></td>
+                        <td class="value"><strong><?php echo $delivery->getDeliveryDate() ?></strong></td>
+                    </tr>
+                    <tr>
+                        <td class="label"><label><?php echo Mage::helper('deliverytime')->__('Time Range:') ?></label></td>
+                        <td class="value"><strong><?php echo $delivery->getTimeStart() . ' - ' . $delivery->getTimeEnd(); ?></strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+</div>
+<?php endif; ?>
+
