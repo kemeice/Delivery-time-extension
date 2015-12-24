@@ -23,9 +23,9 @@
 <layout version="0.1.0">
     <default>
         <reference name="head">
-            <action method="addJs">
+            <!-- <action method="addJs">
                 <script>magecheckout/deliverytime/jquery-ui-1.10.4.custom.min.js</script>
-            </action>
+            </action> -->
             <!--<action method="addJs">-->
             <!--<script>magecheckout/deliverytime/jquery-1.10.2.js</script>-->
             <!--</action>-->
